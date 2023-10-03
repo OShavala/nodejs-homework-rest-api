@@ -6,6 +6,14 @@ const addSchema = Joi.object({
   phone: Joi.string().required(),
 });
 
+
+const updateSchema = Joi.object({
+  name: Joi.string(),
+  
+  email: Joi.string(),
+  phone: Joi.string(),
+});
+
 const contacts = require("../models/contacts");
 
 const { HttpError } = require("../helpers");
@@ -35,17 +43,25 @@ const addContact = async (req, res, next) => {
 };
 
 const updateById = async (req, res, next) => {
-  const { error } = addSchema.validate(req.body);
-  if (error) {
-    throw HttpError(400, "missing fields");
-  }
   const { id } = req.params;
+  const { error } = updateSchema.validate(req.body);
+  
+  
+  if (!req.body || Object.keys(req.body).length === 0) {
+    return res.status(400).json({ message: "missing fields" });
+  }
+
+  if (error) {
+    throw HttpError(400, "invalid fields");
+  }
+
   const result = await contacts.updateContact(id, req.body);
   if (!result) {
     throw HttpError(404, "Not found");
   }
   res.json(result);
 };
+
 
 const removeContact = async (req, res, next) => {
   console.log(req.params);
@@ -67,3 +83,8 @@ module.exports = {
   updateById: ctrlWrapper(updateById),
   removeContact: ctrlWrapper(removeContact),
 };
+
+
+
+
+
