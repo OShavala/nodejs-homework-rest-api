@@ -3,9 +3,7 @@ const { HttpError } = require("../../helpers");
 
 const removeContact = async (req, res) => {
   const { id } = req.params;
-  const { _id: owner } = req.user;
-
-  const result = await Contact.findOneAndDelete({ _id: id, owner });
+  const result = await Contact.findByIdAndDelete(id);
 
   if (!result) {
     throw HttpError(404, "Not found");
@@ -16,5 +14,8 @@ const removeContact = async (req, res) => {
 };
 
 module.exports = removeContact;
+
+
+
 
 

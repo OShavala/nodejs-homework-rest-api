@@ -3,9 +3,7 @@ const { HttpError } = require("../../helpers");
 
 const getById = async (req, res) => {
   const { id } = req.params;
-  const { _id: owner } = req.user;
-
-  const result = await Contact.findOne({ _id: id, owner });
+  const result = await Contact.findById(id);
   if (!result) {
     throw HttpError(404, "Not found");
   }
@@ -13,5 +11,8 @@ const getById = async (req, res) => {
 };
 
 module.exports = getById;
+
+
+
 
 
