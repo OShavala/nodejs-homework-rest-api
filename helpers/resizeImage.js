@@ -7,3 +7,4 @@ const resizeImage = async (sourcePath, destinationPath) => {
 };
 
 module.exports = resizeImage;
+
