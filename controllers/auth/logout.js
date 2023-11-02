@@ -1,3 +1,4 @@
+
 const { User } = require("../../models/user");
 
 const logout = async (req, res) => {
@@ -8,5 +9,7 @@ const logout = async (req, res) => {
 };
 
 module.exports = logout;
+
+
 
 

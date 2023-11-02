@@ -35,7 +35,7 @@ const updateAvatar = async (req, res) => {
     await fs.copyFile(tempUpload, tempImagePath);
   }
 
- 
+
   await resizeImage(tempImagePath, resizedImagePath);
 
   const avatarURL = path.join("avatars", avatarName);
@@ -47,3 +47,5 @@ const updateAvatar = async (req, res) => {
 };
 
 module.exports = updateAvatar;
+
+
